@@ -48,11 +48,12 @@ class SlewDitherPattern:
         self.header['muRA'] = False
         self.header['muDec'] = False
         self.header['epoch'] = False
-        self.header['dRA'] = True
-        self.header['dDec'] = True
+        self.header['dRA'] = False
+        self.header['dDec'] = False
         self.header['rotatorPA'] = False
         self.header['rotatorFrame'] = False
-        self.header['eta'] = False
+        self.header['xi'] = True
+        self.header['eta'] = True
         self.header['comment'] = False
         self.header['commandOption'] = True
         self.header_string = ''
@@ -167,7 +168,7 @@ def distance(dra, ddec):
 
 if __name__ == '__main__':
     obslists = [
-        # [('FRB180301', '06:12:43.40', '+04:33:44.8', 25, 40, 'SL-r')],
+        [('FRB180301', '06:12:43.40', '+04:33:44.8', 25, 40, 'SL-r')],
 
         [('GRB110402A', '13:09:36.54', '+61:15:10.3', 150, 10, 'SL-i')],
 
@@ -214,5 +215,6 @@ if __name__ == '__main__':
     ]
 
     for name, obslist in zip(names, obslists):
+        print(name, obslist)
         a = SlewDitherPattern(obslist, 30, 40, 131, 40, 131)
         a.save_pattern(name)
